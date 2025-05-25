@@ -1,10 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const fetch = require("node-fetch"); // Si Node < 18. Sinon, en natif
+const fetch = require("node-fetch");
 
 router.post("/sendToSheets", async (req, res) => {
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbw3s5CrabYcZuLzb-WuFpc_zXKd2xdZc2eZRIe8OeNLSFipgUzSb_X69CpyGqlsmzh6/exec", {
+    const response = await fetch(process.env.GOOGLE_SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req.body),

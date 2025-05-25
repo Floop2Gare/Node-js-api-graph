@@ -64,3 +64,17 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
 });
+
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const googleRoutes = require("./routes/google");
+app.use("/api", googleRoutes);
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`🚀 Serveur backend lancé sur http://localhost:${PORT}`));
